@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 	/**
-	 * Panels declarations.
+	 * Panels declarations & instantiations.
 	 */
 	private JPanel toolbar;
 	private JPanel gameField;
@@ -17,7 +17,7 @@ public class MainFrame extends JFrame{
 	/**
 	 * Buttons declarations & instantiations.
 	 */
-	private JButton startButton = new JButton("Start new game");
+	private JButton startButton = new JButton("START NEW GAME");
 	
 	/**
 	 * The width and height of the app's main window;
@@ -36,10 +36,6 @@ public class MainFrame extends JFrame{
 	 * - Places some components in the panels.
 	 */
 	public MainFrame(){
-		
-		
-		
-		
 		
 		/**
 		 * Basic frame settings.
@@ -65,6 +61,13 @@ public class MainFrame extends JFrame{
 		// This line sets the size of the app's window.
 		this.setSize(APP_WIDTH, APP_HEIGHT);
 		
+		// This doesn't allow the user to resize the frame.
+		this.setResizable(false);
+		
+		// This centers the frame.
+		this.setLocationRelativeTo(null);
+		
+		// Adding some components.
 		addToolbar();
 		addGamefield();
 		
