@@ -65,15 +65,17 @@ public class MainFrame extends JFrame{
 		// This line sets the size of the app's window.
 		this.setSize(APP_WIDTH, APP_HEIGHT);
 		
+		addToolbar();
+		addGamefield();
 		
-		
-		
-		
-		/**
-		 * Toolbar.
-		 * Let's keep it simple for now.
-		 * Let's just have only one button - the "Start new game" button.
-		 */
+	} // End of MainFrame()
+	
+	/**
+	 * This method adds a toolbar to the top of the main frame.
+	 * Let's keep it simple for now.
+	 * Let's just have only one button - the "Start new game" button.
+	 */
+	private void addToolbar(){
 		// Instantiating the toolbar
 		toolbar = new JPanel();
 		
@@ -85,15 +87,14 @@ public class MainFrame extends JFrame{
 		
 		// Adding the "Start new game" button to the toolbar.
 		toolbar.add(startButton);
+	}
+	
+	/**
+	 * This method adds a new game field to the main frame.
+	 * It's a square under the toolbar, where the magic should happen.
+	 */
+	private void addGamefield(){
 		
-		
-		
-		
-		
-		/**
-		 * The gamefield.
-		 * It's a square under the toolbar, where the magic should happen.
-		 */
 		// Instantiating the gameField object.
 		gameField = new JPanel();
 		
@@ -108,12 +109,7 @@ public class MainFrame extends JFrame{
 		
 		// Adding the gameField to the frame.
 		add(gameField);
-		
-		
-		
-		
-		
-	} // End of MainFrame()
+	}
 	
 } // End of MainFrame
 
