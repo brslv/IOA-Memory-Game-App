@@ -1,9 +1,23 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
+	/**
+	 * Panels declarations.
+	 */
+	private JPanel toolbar;
+	private JPanel gameField;
+	
+	/**
+	 * Buttons declarations & instantiations.
+	 */
+	private JButton startButton = new JButton("Start new game");
 	
 	/**
 	 * The width and height of the app's main window;
@@ -22,6 +36,11 @@ public class MainFrame extends JFrame{
 	 * - Places some components in the panels.
 	 */
 	public MainFrame(){
+		
+		
+		
+		
+		
 		/**
 		 * Basic frame settings.
 		 */
@@ -45,7 +64,56 @@ public class MainFrame extends JFrame{
 		
 		// This line sets the size of the app's window.
 		this.setSize(APP_WIDTH, APP_HEIGHT);
-	}
+		
+		
+		
+		
+		
+		/**
+		 * Toolbar.
+		 * Let's keep it simple for now.
+		 * Let's just have only one button - the "Start new game" button.
+		 */
+		// Instantiating the toolbar
+		toolbar = new JPanel();
+		
+		// Adding the toolbar to the top of the frame.
+		add(toolbar, BorderLayout.NORTH);
+		
+		// Setting the layout of the toolbar to be FlowLayout and to position content in it's center.
+		toolbar.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		// Adding the "Start new game" button to the toolbar.
+		toolbar.add(startButton);
+		
+		
+		
+		
+		
+		/**
+		 * The gamefield.
+		 * It's a square under the toolbar, where the magic should happen.
+		 */
+		// Instantiating the gameField object.
+		gameField = new JPanel();
+		
+		// Adding the gameField to the frame.
+		add(gameField, BorderLayout.CENTER);
+		
+		// Setting the layout of the gameField
+		gameField.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		// Setting the background color of the panel to dark-gray.
+		gameField.setBackground(Color.DARK_GRAY);
+		
+		// Adding the gameField to the frame.
+		add(gameField);
+		
+		
+		
+		
+		
+	} // End of MainFrame()
 	
-}
+} // End of MainFrame
 
