@@ -37,7 +37,7 @@ public class Card extends JButton{
 			add("Hi");
 			add("Hello");
 			add("Hello");
-			add("Beer");
+			add("Beer"); 
 			add("Beer");
 		}};
 		
