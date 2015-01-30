@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ public class MainFrame extends JFrame{
 	 */
 	private JPanel toolbar;
 	private JPanel gameField;
+	private Card cardButton;
 	
 	/**
 	 * Buttons declarations & instantiations.
@@ -24,6 +27,14 @@ public class MainFrame extends JFrame{
 	 */
 	public final int APP_WIDTH = 500;
 	public final int APP_HEIGHT = 500;
+	public int gridLayoutRows = 2;
+	public int gridLayoutCols = 3;
+	public int numberOfCards = gridLayoutRows * gridLayoutCols;
+	
+	/**
+	 * All the cards, generated for a particular game.
+	 */
+	ArrayList<Card> allCards = Card.generateCards(numberOfCards);
 	
 	/**
 	 * Constructor of the MainFrame class.
@@ -43,6 +54,9 @@ public class MainFrame extends JFrame{
 		// Setting the title of the app.
 		// For now, some gibberish.
 		super("The IOA Memory Game App, version 'too-alpha-to-be-cool'.");
+
+		// This line sets the size of the app's window.
+		this.setSize(APP_WIDTH, APP_HEIGHT);
 		
 		// In Swing we have layouts (the way the app positions elements on the screen).
 		// Here we set the layout of the main frame (JFrame, the main window) of the app.
@@ -58,14 +72,9 @@ public class MainFrame extends JFrame{
 		// This line does the trick.
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		// This line sets the size of the app's window.
-		this.setSize(APP_WIDTH, APP_HEIGHT);
-		
 		// This doesn't allow the user to resize the frame.
 		this.setResizable(false);
 		
-		// This centers the frame.
-		this.setLocationRelativeTo(null);
 		
 		// Adding some components.
 		addToolbar();
@@ -100,12 +109,19 @@ public class MainFrame extends JFrame{
 		
 		// Instantiating the gameField object.
 		gameField = new JPanel();
+		gameField.setSize(250, 250);
 		
 		// Adding the gameField to the frame.
 		add(gameField, BorderLayout.CENTER);
 		
 		// Setting the layout of the gameField
-		gameField.setLayout(new FlowLayout(FlowLayout.CENTER));
+		gameField.setLayout(new GridLayout(2,3));
+	    
+		// Adding all the cards, generated in the allCards ArrayList
+		// to the gameField.
+		for (int i = 0; i < allCards.size(); i++) {
+			gameField.add(allCards.get(i));
+		}
 		
 		// Setting the background color of the panel to dark-gray.
 		gameField.setBackground(Color.DARK_GRAY);
