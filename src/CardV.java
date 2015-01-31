@@ -1,11 +1,8 @@
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-
-@SuppressWarnings("serial")
-public  class CardV extends JButton{
-	
-		private JButton cardButton;
+public  class CardV{	//Initialized in the Deck's constructor
+	// Nothing special here. Just getters and setters. Part of OOP. 
+	//You aren't supposed to know this for your next exam :D
 		private ImageIcon frontImg;
 		private ImageIcon backImg;
 		
@@ -20,6 +17,14 @@ public  class CardV extends JButton{
 		
 		public void setCardBackImg(ImageIcon backImg){
 			this.backImg = backImg;
+		}
+		
+		public ImageIcon getFront(){
+			return frontImg;
+		}
+
+		public ImageIcon getBack() {
+			return backImg;
 		}
 	}
 

@@ -5,18 +5,16 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 
-public class CardStyle{
+public class CardStyle{  // Initialized in Deck's constructor
 
-	private ImageIcon backImg;
-	private ArrayList<ImageIcon> frontImg;
-	private static int index = -1;
+	private ImageIcon backImg; 	// we need just 1 back img for all cards, because it's same
+	private ArrayList<ImageIcon> frontImg;	// keep all different images for the front
+	private static int index = -1; //-1 because cannot be changed after returning the value 
+	// This is static, because it's not a part of the Object. Used for some logic
 	
-	// TO DO ADD CARDS TO STYLES
 	
-	public CardStyle(String imgFolderPath) throws IOException{
-		
-		this.backImg = new ImageIcon(getBackImageFromFolder(imgFolderPath, "back"));		
-				
+	public CardStyle(String imgFolderPath) throws IOException{	//I was lazy to throw this. Sorry	
+		this.backImg = new ImageIcon(getBackImageFromFolder(imgFolderPath, "back"));						
 		this.frontImg = new ArrayList<ImageIcon>();
 		frontImg.addAll(getImageListFromFolder(imgFolderPath));	
 	}
@@ -36,6 +34,7 @@ public class CardStyle{
 	}
 		
 	//Not sure if there must be try-catch block but let's not risk it
+	// Getting all images from a directory
 	public static ArrayList<ImageIcon> getImageListFromFolder(String imgFolderPath) {
 	    ArrayList<ImageIcon> images = new ArrayList<ImageIcon>();	    	    
 	    File folder = new File(imgFolderPath);	    
@@ -56,7 +55,7 @@ public class CardStyle{
 	    return images;
 	}
 	
-	// if-else statements used instead try-catch
+	// Finding a file by start String 
 	public static String getBackImageFromFolder(String imgFolderPath, String fileStartsWith){
 		
 	    File dir = new File(imgFolderPath);

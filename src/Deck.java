@@ -8,12 +8,11 @@ public class Deck{
 	private HashMap<CardV, CardV> cards;
 
 	
-	public Deck(int countOfCards, String imgFolderPath) throws IOException {
-		
-		CardStyle cs = new CardStyle(imgFolderPath);
-		
+	public Deck(int countOfCards, String imgFolderPath) throws IOException {		
+	
+		CardStyle cs = new CardStyle(imgFolderPath);			
 		cards = new HashMap<CardV, CardV>();
-		for (int i = 0; i < countOfCards; i++) {	
+		for (int i = 0; i < countOfCards/2; i++) {
 			CardV temp = new CardV(cs.getNextFrontImage(), cs.getBackImage());
 			cards.put(temp, temp);
 		}		
