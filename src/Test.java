@@ -14,9 +14,7 @@ public class Test {
 			System.out.println( "B : " + card.getBack() + "F : " + card.getFront());
 		}
 		
-		ArrayList<CardV> arr = new ArrayList<CardV>();
-		arr.addAll(myDeck.getHashMapCards().keySet());
-		arr.addAll(myDeck.getHashMapCards().values());
+		ArrayList<CardV> arr = myDeck.getListOfAllCards();
 
 //-----------------------------------------REFERENCES---------------------------------------	
 		System.out.println("References check: ");
