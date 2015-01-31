@@ -13,7 +13,7 @@ public class Card extends JButton{
 	private JButton cardButton;
 	
 	/**
-	 * Constructor.
+	 *  Constructor.
 	 * Creates a new card and sets it name.
 	 * @param title
 	 */

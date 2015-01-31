@@ -5,7 +5,7 @@ public class Test {
 	public static void main(String[] args) throws IOException {
 	
 //----------------------------- TEST INITIALISATION AND FILE USAGE -------------------------
-		Deck myDeck = new Deck(10, "C:\\Users\\Victoria\\Desktop\\Images");		
+		Deck myDeck = new Deck(4, "Images");		
 		
 		for (CardV cardV : myDeck.getListOfAllCards()) {
 			
