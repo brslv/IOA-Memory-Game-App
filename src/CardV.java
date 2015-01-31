@@ -26,5 +26,6 @@ public  class CardV{	//Initialized in the Deck's constructor
 		public ImageIcon getBack() {
 			return backImg;
 		}
+		
 	}
 

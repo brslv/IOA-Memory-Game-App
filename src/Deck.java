@@ -6,10 +6,8 @@ import java.util.HashMap;
 public class Deck{
 
 	private HashMap<CardV, CardV> cards;
-
 	
-	public Deck(int countOfCards, String imgFolderPath) throws IOException {		
-	
+	public Deck(int countOfCards, String imgFolderPath) throws IOException {			
 		CardStyle cs = new CardStyle(imgFolderPath);			
 		cards = new HashMap<CardV, CardV>();
 		for (int i = 0; i < countOfCards/2; i++) {
@@ -23,6 +21,10 @@ public class Deck{
 		result.addAll(cards.values());
 		result.addAll(cards.keySet());
 		return result;
+	}
+	
+	public HashMap<CardV, CardV> getHashMapCards(){
+		return this.cards;
 	}
 	
 	
