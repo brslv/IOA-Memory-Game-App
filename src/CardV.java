@@ -14,6 +14,7 @@ public  class CardV{	//Initialized in the Deck's constructor
 		public CardV(ImageIcon frontImg, ImageIcon backImg) {
 			this.frontImg = frontImg;
 			this.backImg = backImg;
+			this.currentImg = backImg;
 			this.id = serialNum;
 			serialNum++;
 		}
