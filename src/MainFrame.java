@@ -39,7 +39,6 @@ public class MainFrame extends JFrame{
 		
 		MainMenu();
 		addGamefield();
-		
 	} // End of MainFrame()
 	
 	public void MainMenu() {
