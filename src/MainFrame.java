@@ -1,14 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -19,6 +17,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 	
+	private Deck deck = new Deck(6, "Images");
 	private JPanel gameField;
 	
 	public final int APP_WIDTH = 500;
@@ -27,7 +26,7 @@ public class MainFrame extends JFrame{
 	public int gridLayoutCols = 3;
 	public int numberOfCards = gridLayoutRows * gridLayoutCols;
 	
-	ArrayList<Card> allCards = Card.generateCards(numberOfCards);
+	ArrayList<CardV> allCards = deck.getListOfAllCards();
 	
 	public MainFrame(){
 		super("The IOA Memory Game App, version 'too-alpha-to-be-cool'.");
@@ -101,12 +100,14 @@ public class MainFrame extends JFrame{
 	
 	public void addCardsToGamefield(){
 		for (int i = 0; i < allCards.size(); i++) {
-			gameField.add(allCards.get(i));
+			ImageIcon icon = allCards.get(i).getFront();
+			JButton card = new JButton(icon);
+			gameField.add(card);
 		}
 	}
 	
 	public void startNewGame(){
-		allCards = Card.generateCards(numberOfCards);
+		allCards = deck.getListOfAllCards();
     	removeCardsFromGamefield();
     	addCardsToGamefield();
     	gameField.revalidate(); 
