@@ -33,8 +33,11 @@ public class CardListener extends JButton implements ActionListener{
 		}
 		
 		 if (cardListener.getIsClicked() && cardListenersList.size()==2) {
-			cardListener.removeAll();
+		// setting back img for current img (foreach) before to remove elements	
+			 cardListener.removeAll();
+		
 			cardListener.add(cardListener);
+		// setting front img for curr img 
 		}
 		else if (cardListener.getIsClicked() && cardListenersList.size() < 2 ){
 			cardListener.add(cardListener);

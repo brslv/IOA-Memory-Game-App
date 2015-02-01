@@ -7,7 +7,10 @@ public  class CardV{	//Initialized in the Deck's constructor
 		private int id = serialNum;
 		private ImageIcon frontImg;
 		private ImageIcon backImg;
+		private ImageIcon currentImg = backImg;
 		
+		
+
 		public CardV(ImageIcon frontImg, ImageIcon backImg) {
 			this.frontImg = frontImg;
 			this.backImg = backImg;
@@ -35,5 +38,12 @@ public  class CardV{	//Initialized in the Deck's constructor
 			public String toString() {				
 				return ("ID: " + id);
 			}
+		public ImageIcon getCurrentImg() {
+			return currentImg;
+		}
+
+		public void setCurrentImg(ImageIcon currentImg) {
+			this.currentImg = currentImg;
+		}
 	}
 
