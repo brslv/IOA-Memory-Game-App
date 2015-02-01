@@ -41,7 +41,6 @@ public class StartScreen extends JFrame {
 		
 		JButton quitButton = new JButton("Quit");
 		quitButton.setBounds(200, 120, 100, 30);
-		 
 		
 		quitButton.addActionListener(new ActionListener() {
 			@Override
@@ -54,12 +53,19 @@ public class StartScreen extends JFrame {
 		JButton startButton = new JButton("Start new game");
 		startButton.setBounds(175, 60, 150,30);
 	
+		startButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event){
+				
+			}
+		});
 		
 		 add(quitButton);
 		 add(startButton);
 		
 		pack();
 		setTitle("Start screen");
+		setVisible(true);
 		setSize(500,500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

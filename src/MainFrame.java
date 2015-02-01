@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,6 +18,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
+	
 	/**
 	 * Panels declarations & instantiations.
 	 */
@@ -26,7 +29,6 @@ public class MainFrame extends JFrame{
 	/**
 	 * Buttons declarations & instantiations.
 	 */
-	private JButton startButton = new JButton("START NEW GAME");
 	
 	/**
 	 * The width and height of the app's main window;
@@ -81,8 +83,6 @@ public class MainFrame extends JFrame{
 		// This doesn't allow the user to resize the frame.
 		this.setResizable(false);
 		
-		
-		// Adding some components.
 		MainMenu();
 		addGamefield();
 		
@@ -105,16 +105,14 @@ public class MainFrame extends JFrame{
 			eStart.setMnemonic(KeyEvent.VK_N);			
 			eStart.setToolTipText("Start new game.");
 			eStart.addActionListener(new ActionListener() {
-	            @Override
 	            public void actionPerformed(ActionEvent event) {
-	                //System.exit(0);
+	            	startNewGame();
 	            }
 	        });
 			JMenu difficulty = new JMenu("Difficulty");
 			JMenuItem eDifficulty = new JMenuItem("Difficulty");
 			eDifficulty.setToolTipText("Pick difficulty");
 			eDifficulty.addActionListener( new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent event) {
 					
 				}
@@ -125,7 +123,6 @@ public class MainFrame extends JFrame{
 		        eExit.setMnemonic(KeyEvent.VK_E);
 		        eExit.setToolTipText("Exit application");
 		        eExit.addActionListener(new ActionListener() {
-		            @Override
 		            public void actionPerformed(ActionEvent event) {
 		                System.exit(0);
 		            }
@@ -143,11 +140,11 @@ public class MainFrame extends JFrame{
 	 * This method adds a new game field to the main frame.
 	 * It's a square under the toolbar, where the magic should happen.
 	 */
-	private void addGamefield(){
+	public void addGamefield(){
 		
 		// Instantiating the gameField object.
 		gameField = new JPanel();
-		gameField.setSize(250, 250);
+		gameField.setSize(500, 500);
 		
 		// Adding the gameField to the frame.
 		add(gameField, BorderLayout.CENTER);
@@ -155,17 +152,28 @@ public class MainFrame extends JFrame{
 		// Setting the layout of the gameField
 		gameField.setLayout(new GridLayout(2,3));
 	    
-		// Adding all the cards, generated in the allCards ArrayList
-		// to the gameField.
-		for (int i = 0; i < allCards.size(); i++) {
-			gameField.add(allCards.get(i));
-		}
-		
 		// Setting the background color of the panel to dark-gray.
 		gameField.setBackground(Color.DARK_GRAY);
 		
 		// Adding the gameField to the frame.
 		add(gameField);
+	}
+	
+	public void removeCardsFromGamefield(){
+		gameField.removeAll();
+	}
+	
+	public void addCardsToGamefield(){
+		for (int i = 0; i < allCards.size(); i++) {
+			gameField.add(allCards.get(i));
+		}
+	}
+	
+	public void startNewGame(){
+		allCards = Card.generateCards(numberOfCards);
+    	removeCardsFromGamefield();
+    	addCardsToGamefield();
+    	gameField.revalidate();
 	}
 	
 } // End of MainFrame

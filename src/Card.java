@@ -39,6 +39,8 @@ public class Card extends JButton{
 			add("Hello");
 			add("Beer"); 
 			add("Beer");
+			add("Zombie"); 
+			add("Zombie");
 		}};
 		
 		// A list, containing all the used indexes (used card titles).
