@@ -94,47 +94,49 @@ public class MainFrame extends JFrame{
 	 * Let's just have only one button - the "Start new game" button.
 	 */
 
-		public void MainMenu() {
-			Toolbar();
-		}
-		private void Toolbar() {
-			JMenuBar menubar = new JMenuBar();
-			
-			JMenu start = new JMenu("New Game");
-			JMenuItem eStart = new JMenuItem("New Game");
-			eStart.setMnemonic(KeyEvent.VK_N);			
-			eStart.setToolTipText("Start new game.");
-			eStart.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent event) {
-	            	startNewGame();
-	            }
-	        });
-			JMenu difficulty = new JMenu("Difficulty");
-			JMenuItem eDifficulty = new JMenuItem("Difficulty");
-			eDifficulty.setToolTipText("Pick difficulty");
-			eDifficulty.addActionListener( new ActionListener() {
-				public void actionPerformed(ActionEvent event) {
-					
-				}
-			});
-			
-			JMenu exit = new JMenu("Exit");
-			 JMenuItem eExit = new JMenuItem("Exit");
-		        eExit.setMnemonic(KeyEvent.VK_E);
-		        eExit.setToolTipText("Exit application");
-		        eExit.addActionListener(new ActionListener() {
-		            public void actionPerformed(ActionEvent event) {
-		                System.exit(0);
-		            }
-		        });
-
-		        menubar.add(eStart);
-		        menubar.add(eDifficulty);
-		        menubar.add(eExit);
-		        setJMenuBar(menubar);
-
-		        setDefaultCloseOperation(EXIT_ON_CLOSE);
-		}
+	public void MainMenu() {
+		Toolbar();
+	}
+	
+	private void Toolbar() {
+		JMenuBar menubar = new JMenuBar();
+		
+		JMenu start = new JMenu("New Game");
+		JMenuItem eStart = new JMenuItem("New Game");
+		eStart.setMnemonic(KeyEvent.VK_N);			
+		eStart.setToolTipText("Start new game.");
+		eStart.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent event) {
+	        	startNewGame();
+	        }
+	    });
+		JMenu difficulty = new JMenu("Difficulty");
+		JMenuItem eDifficulty = new JMenuItem("Difficulty");
+		eDifficulty.setToolTipText("Pick difficulty");
+		eDifficulty.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				
+			}
+		});
+		
+		JMenu exit = new JMenu("Exit");
+		JMenuItem eExit = new JMenuItem("Exit");
+		
+		eExit.setMnemonic(KeyEvent.VK_E);
+		eExit.setToolTipText("Exit application");
+		eExit.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent event) {
+		        System.exit(0);
+		    }
+		});
+		
+		menubar.add(eStart);
+		menubar.add(eDifficulty);
+		menubar.add(eExit);
+		setJMenuBar(menubar);
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
 	
 	/**
 	 * This method adds a new game field to the main frame.
@@ -173,7 +175,7 @@ public class MainFrame extends JFrame{
 		allCards = Card.generateCards(numberOfCards);
     	removeCardsFromGamefield();
     	addCardsToGamefield();
-    	gameField.revalidate();
+    	gameField.revalidate(); 
 	}
 	
 } // End of MainFrame
