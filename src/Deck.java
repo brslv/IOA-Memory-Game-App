@@ -7,8 +7,14 @@ public class Deck{
 
 	private HashMap<CardV, CardV> cards;
 	
-	public Deck(int countOfCards, String imgFolderPath) throws IOException {			
-		CardStyle cs = new CardStyle(imgFolderPath);			
+	public Deck(int countOfCards, String imgFolderPath){			
+		CardStyle cs = null;
+		try {
+			cs = new CardStyle(imgFolderPath);
+		} catch (IOException e) {
+			System.out.println("CardStyle files/images were not found!");
+			e.printStackTrace();
+		}			
 		cards = new HashMap<CardV, CardV>();
 		for (int i = 0; i < countOfCards/2; i++) {
 			CardV temp = new CardV(cs.getNextFrontImage(), cs.getBackImage());
