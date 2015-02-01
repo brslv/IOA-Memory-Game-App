@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
 public class Test {
 //================================THIS IS A TEST! NOT OFFICIAL!==============================
 	
@@ -30,7 +32,9 @@ public class Test {
 				System.out.println(arr.get(i) + " & " + arr.get(j) + ":\t" + 
 			ifSameCard(myDeck, arr.get(i), arr.get(j)));
 			}
+			
 		}
+		startScreen();
 	}
 	
 //-----------------------------------------EQALITY-------------------------------------------
@@ -42,4 +46,18 @@ public class Test {
 		else
 			return false;
 	}
+	
+//-------------------------------------------------------------------------------------------
+	
+	public static void startScreen(){
+		SwingUtilities.invokeLater(new Runnable(){
+			@Override
+			public void run(){
+				// We instantiate a new game.
+				new Test_Frame();
+			}
+		});
+	}
+	
+	
 }
