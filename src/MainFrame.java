@@ -2,10 +2,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -77,7 +83,7 @@ public class MainFrame extends JFrame{
 		
 		
 		// Adding some components.
-		addToolbar();
+		MainMenu();
 		addGamefield();
 		
 	} // End of MainFrame()
@@ -87,19 +93,51 @@ public class MainFrame extends JFrame{
 	 * Let's keep it simple for now.
 	 * Let's just have only one button - the "Start new game" button.
 	 */
-	private void addToolbar(){
-		// Instantiating the toolbar
-		toolbar = new JPanel();
-		
-		// Adding the toolbar to the top of the frame.
-		add(toolbar, BorderLayout.NORTH);
-		
-		// Setting the layout of the toolbar to be FlowLayout and to position content in it's center.
-		toolbar.setLayout(new FlowLayout(FlowLayout.CENTER));
-		
-		// Adding the "Start new game" button to the toolbar.
-		toolbar.add(startButton);
-	}
+
+		public void MainMenu() {
+			Toolbar();
+		}
+		private void Toolbar() {
+			JMenuBar menubar = new JMenuBar();
+			
+			JMenu start = new JMenu("New Game");
+			JMenuItem eStart = new JMenuItem("New Game");
+			eStart.setMnemonic(KeyEvent.VK_N);			
+			eStart.setToolTipText("Start new game.");
+			eStart.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent event) {
+	                //System.exit(0);
+	            }
+	        });
+			JMenu difficulty = new JMenu("Difficulty");
+			JMenuItem eDifficulty = new JMenuItem("Difficulty");
+			eDifficulty.setToolTipText("Pick difficulty");
+			eDifficulty.addActionListener( new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent event) {
+					
+				}
+			});
+			
+			JMenu exit = new JMenu("Exit");
+			 JMenuItem eExit = new JMenuItem("Exit");
+		        eExit.setMnemonic(KeyEvent.VK_E);
+		        eExit.setToolTipText("Exit application");
+		        eExit.addActionListener(new ActionListener() {
+		            @Override
+		            public void actionPerformed(ActionEvent event) {
+		                System.exit(0);
+		            }
+		        });
+
+		        menubar.add(eStart);
+		        menubar.add(eDifficulty);
+		        menubar.add(eExit);
+		        setJMenuBar(menubar);
+
+		        setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
 	
 	/**
 	 * This method adds a new game field to the main frame.
