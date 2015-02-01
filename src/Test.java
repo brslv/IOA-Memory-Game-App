@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
@@ -35,6 +37,15 @@ public class Test {
 			
 		}
 		startScreen();
+		
+		ArrayList testRands = randList(myDeck.getListOfAllCards());
+		System.out.println("RANDOM TEST_01!!!");
+		
+		for (Object object : testRands) {
+			System.out.println(object.toString());
+		}
+		
+		System.out.println("RANDOM TEST_02!!!");
 	}
 	
 //-----------------------------------------EQALITY-------------------------------------------
@@ -59,5 +70,27 @@ public class Test {
 		});
 	}
 	
+	
+	public static <E> ArrayList<E> randList(ArrayList<E> arrList){
+		HashSet<Integer> index = new HashSet<Integer>(); 
+		ArrayList<E> result = new ArrayList<E>();
+		for (int i = 0; i < arrList.size(); i++) {
+			index.add(i);
+		}
+		while(true){
+			int rand = (int)(Math.random()*100);
+			
+			if (index.remove(rand)){
+				result.add(arrList.get(rand));
+			}
+			else if(index.size() == 0){
+				break;
+			}
+			else {
+				continue;
+			}
+		}
+		return result;
+	}
 	
 }
