@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 	
-	private Deck deck = new Deck(6, "Images");
 	private JPanel gameField;
 	
 	public final int APP_WIDTH = 500;
@@ -25,6 +24,7 @@ public class MainFrame extends JFrame{
 	public int gridLayoutRows = 2;
 	public int gridLayoutCols = 3;
 	public int numberOfCards = gridLayoutRows * gridLayoutCols;
+	private Deck deck = new Deck(numberOfCards, "Images");
 	
 	ArrayList<CardV> allCards = deck.getListOfAllCards();
 	
