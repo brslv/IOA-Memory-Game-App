@@ -27,5 +27,21 @@ public class Deck{
 		return this.cards;
 	}
 	
+	// if we have same references 
+	public boolean compareCards(CardV first, CardV second){
+		if(first == second)
+			return true;
+		else
+			return false;
+	}
+	
+	// if we have to change the logic and have different references
+//	public boolean compareCards(CardV first, CardV second){
+//		if(first.getFront().toString().equals(second.getFront().toString()))
+//			return true;
+//		else
+//			return false;
+//	}
+	
 	
 }
