@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -19,10 +18,11 @@ public class MainFrame extends JFrame{
 	
 	private JPanel gameField;
 	
-	public final int APP_WIDTH = 500;
-	public final int APP_HEIGHT = 500;
-	public int gridLayoutRows = 2;
-	public int gridLayoutCols = 3;
+	public int gridLayoutRows = 5;
+	public int gridLayoutCols = 6;
+	public final int APP_WIDTH = gridLayoutRows * 150;
+	public final int APP_HEIGHT = gridLayoutCols * 150;
+	
 	public int numberOfCards = gridLayoutRows * gridLayoutCols;
 	private Deck deck = new Deck(numberOfCards, "Images");
 	
@@ -86,11 +86,10 @@ public class MainFrame extends JFrame{
 	
 	public void addGamefield(){
 		gameField = new JPanel();
-		gameField.setSize(500, 500);
+		gameField.setSize(APP_WIDTH, APP_HEIGHT);
 		add(gameField, BorderLayout.CENTER);
-		gameField.setLayout(new GridLayout(2,3));
-		gameField.setBackground(Color.DARK_GRAY);
-		
+		gameField.setLayout(new GridLayout(gridLayoutRows,gridLayoutCols));
+		gameField.setBackground(Color.DARK_GRAY);		
 		add(gameField);
 	}
 	
