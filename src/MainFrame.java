@@ -101,7 +101,7 @@ public class MainFrame extends JFrame{
 	public void addCardsToGamefield(){
 		for (int i = 0; i < allCards.size(); i++) {
 			ImageIcon icon = allCards.get(i).getFront();
-			JButton card = new JButton(icon);
+			CardListener card = new CardListener(icon);
 			gameField.add(card);
 		}
 	}
