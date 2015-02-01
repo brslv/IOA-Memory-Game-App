@@ -1,22 +1,35 @@
-import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public  class CardV{	//Initialized in the Deck's constructor
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+@SuppressWarnings("serial")
+public  class CardV extends JButton implements ActionListener{	//Initialized in the Deck's constructor
 	// Nothing special here. Just getters and setters. Part of OOP. 
 	//You aren't supposed to know this for your next exam :D
 		private static int serialNum = 1;
 		private int id = serialNum;
 		private ImageIcon frontImg;
 		private ImageIcon backImg;
-		private ImageIcon currentImg = backImg;
-		
-		
+		private ImageIcon currentImg;
 
 		public CardV(ImageIcon frontImg, ImageIcon backImg) {
+			super(backImg);
 			this.frontImg = frontImg;
 			this.backImg = backImg;
 			this.currentImg = backImg;
 			this.id = serialNum;
+			this.addActionListener(this);
 			serialNum++;
+		}
+		
+		public void changeImage(){
+			this.setCurrentImg(this.getFront());
+		}
+		
+		public void actionPerformed(ActionEvent e){
+			this.setIcon(frontImg);
 		}
 		
 		public void setCardFrontImg(ImageIcon frontImg){

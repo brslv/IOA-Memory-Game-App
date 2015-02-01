@@ -72,7 +72,7 @@ public class CardStyle{  // Initialized in Deck's constructor
 	         return null;
 	      } 
 	      else {
-	           return (dir.getAbsoluteFile())+ "\\" + children[0];
+	           return (dir.getAbsoluteFile())+ "/" + children[0];
 	      } 	     
 	}   
 }

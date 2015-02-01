@@ -14,10 +14,13 @@ public class CardListener extends JButton implements ActionListener{
 	
 	public CardListener(ImageIcon icon){
 		super(icon);
+			
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		
 		
 	}
 	
