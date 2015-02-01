@@ -54,7 +54,7 @@ public class Test {
 			@Override
 			public void run(){
 				// We instantiate a new game.
-				new Test_Frame();
+				new MainFrame();
 			}
 		});
 	}
