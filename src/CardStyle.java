@@ -58,6 +58,7 @@ public class CardStyle{  // Initialized in Deck's constructor
 	public static String getBackImageFromFolder(String imgFolderPath, String fileStartsWith){
 		
 	    File dir = new File(imgFolderPath);
+	    
 	      FilenameFilter filter = new FilenameFilter() {
 	         public boolean accept
 	         (File dir, String name) {
@@ -71,7 +72,7 @@ public class CardStyle{  // Initialized in Deck's constructor
 	         return null;
 	      } 
 	      else {
-	           return children[0];
+	           return (dir.getAbsoluteFile())+ "\\" + children[0];
 	      } 	     
 	}   
 }

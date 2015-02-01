@@ -18,9 +18,9 @@ public class MainFrame extends JFrame{
 	
 	private JPanel gameField;
 	
-	public int gridLayoutRows = 5;
-	public int gridLayoutCols = 6;
-	public final int APP_WIDTH = gridLayoutRows * 150;
+	public int gridLayoutRows = 4;
+	public int gridLayoutCols = 5;
+	public final int APP_WIDTH = gridLayoutRows * 180;
 	public final int APP_HEIGHT = gridLayoutCols * 150;
 	
 	public int numberOfCards = gridLayoutRows * gridLayoutCols;
@@ -99,7 +99,7 @@ public class MainFrame extends JFrame{
 	
 	public void addCardsToGamefield(){
 		for (int i = 0; i < allCards.size(); i++) {
-			ImageIcon icon = allCards.get(i).getFront();
+			ImageIcon icon = allCards.get(i).getBack();
 			CardListener card = new CardListener(icon);
 			gameField.add(card);
 		}
