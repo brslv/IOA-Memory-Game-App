@@ -11,7 +11,7 @@ public class App{
 			@Override
 			public void run(){
 				// We instantiate a new game.
-				new MainFrame();
+				new StartScreen(); 
 			}
 		});
 		
