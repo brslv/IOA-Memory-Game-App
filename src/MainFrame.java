@@ -47,6 +47,8 @@ public class MainFrame extends JFrame{
 		
 		Toolbar();
 		addGamefield();
+		startNewGame();
+		
 		
 		statsField = new JPanel();
 		statsField.add(statsLabel);

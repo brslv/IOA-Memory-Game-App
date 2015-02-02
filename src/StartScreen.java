@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 
 public class StartScreen extends JFrame {
@@ -52,13 +54,20 @@ public class StartScreen extends JFrame {
 		
 		JButton startButton = new JButton("Start new game");
 		startButton.setBounds(175, 60, 150,30);
-	
-		startButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent event){
-				
-			}
-		});
+		startButton.setToolTipText("Start new game.");
+		startButton.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent event) {
+	        	SwingUtilities.invokeLater(new Runnable(){
+	    			@Override
+	    			public void run(){
+	    				// We instantiate a new game.
+	    				 new MainFrame();
+	    				 setVisible(false);
+	    			}
+	    		});
+	        }
+	    });
+		 
 		
 		 add(quitButton);
 		 add(startButton);
