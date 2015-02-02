@@ -7,13 +7,14 @@ import java.util.HashSet;
 public class Deck{
 
 	private HashMap<CardV, CardV> cards;
+	public static ArrayList<CardV> clickedCards = new ArrayList<CardV>();
+	public static int disabledCardsCounter = 0;
 	
 	public Deck(int countOfCards, String imgFolderPath){			
 		CardStyle cs = null;
 		try {
 			cs = new CardStyle(imgFolderPath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}			
 		cards = new HashMap<CardV, CardV>();

@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,15 +9,20 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 	
+	private Timer timer;
+	
 	private JPanel gameField;
+	private JPanel statsField;
+	private JLabel statsLabel = new JLabel("Some stats here...");
 	
 	public int gridLayoutRows = 3;
 	public int gridLayoutCols = 4;
@@ -27,6 +33,10 @@ public class MainFrame extends JFrame{
 	
 	ArrayList<CardV> allCards = deck.getListOfAllCards();
 	
+	private static int clickCounter = 1;
+	
+	
+	
 	public MainFrame(){
 		super("The IOA Memory Game App, version 'too-alpha-to-be-cool'.");
 		this.setSize(APP_WIDTH, APP_HEIGHT);
@@ -35,28 +45,35 @@ public class MainFrame extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
-		MainMenu();
+		Toolbar();
 		addGamefield();
+		
+		statsField = new JPanel();
+		statsField.add(statsLabel);
+		add(statsField,BorderLayout.SOUTH);
 	} // End of MainFrame()
 	
-	public void MainMenu() {
-		Toolbar();
-	}
+	
 	
 	private void Toolbar() {
 		JMenuBar menubar = new JMenuBar();
+		menubar.setLayout(new FlowLayout(FlowLayout.LEFT));
+		menubar.setBackground(Color.WHITE);
 		
-		JMenu start = new JMenu("New Game");
 		JMenuItem eStart = new JMenuItem("New Game");
+		eStart.setBackground(Color.WHITE);
 		eStart.setMnemonic(KeyEvent.VK_N);			
 		eStart.setToolTipText("Start new game.");
 		eStart.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent event) {
 	        	startNewGame();
+	        	timer = new Timer(0, null);
+	        	timer.start();
 	        }
 	    });
-		JMenu difficulty = new JMenu("Difficulty");
+		
 		JMenuItem eDifficulty = new JMenuItem("Difficulty");
+		eDifficulty.setBackground(Color.WHITE);
 		eDifficulty.setToolTipText("Pick difficulty");
 		eDifficulty.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -64,9 +81,8 @@ public class MainFrame extends JFrame{
 			}
 		});
 		
-		JMenu exit = new JMenu("Exit");
 		JMenuItem eExit = new JMenuItem("Exit");
-		
+		eExit.setBackground(Color.WHITE);
 		eExit.setMnemonic(KeyEvent.VK_E);
 		eExit.setToolTipText("Exit application");
 		eExit.addActionListener(new ActionListener() {
@@ -78,10 +94,12 @@ public class MainFrame extends JFrame{
 		menubar.add(eStart);
 		menubar.add(eDifficulty);
 		menubar.add(eExit);
-		setJMenuBar(menubar);
 		
+		setJMenuBar(menubar);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+	
+	
 	
 	public void addGamefield(){
 		gameField = new JPanel();
@@ -92,16 +110,60 @@ public class MainFrame extends JFrame{
 		add(gameField);
 	}
 	
+	
+	
 	public void removeCardsFromGamefield(){
 		gameField.removeAll();
 	}
 	
+	// pure magic!
+	
 	public void addCardsToGamefield(){
 		for (int i = 0; i < allCards.size(); i++) {
 			CardV card = new CardV(allCards.get(i).getFront(), allCards.get(i).getBack());
+			
+			card.addActionListener(new ActionListener(){
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(clickCounter <= 2){
+						card.setCurrentImg(card.getFront());
+						card.setIcon(card.getCurrentImg());
+						Deck.clickedCards.add(card);
+						
+						if(clickCounter == 2){
+							if(card.getFront() == Deck.clickedCards.get(0).getFront()){
+								if(card != Deck.clickedCards.get(0)){
+									card.setEnabled(false);
+									Deck.clickedCards.get(0).setEnabled(false);
+									Deck.disabledCardsCounter += 2;
+									card.setIcon(card.getBack());
+									Deck.clickedCards.get(0).setIcon(Deck.clickedCards.get(0).getBack());
+								}
+							}
+						}
+						clickCounter++;
+					}else{
+						clickCounter = 2;
+							
+						// Flips the mismatched cards
+						for (int j = 0; j < Deck.clickedCards.size(); j++) {
+							ImageIcon backOfTheCard = card.getBack();
+							Deck.clickedCards.get(j).setCurrentImg(backOfTheCard);
+							Deck.clickedCards.get(j).setIcon(card.getCurrentImg());
+						}
+						
+						card.setIcon(card.getFront());
+						Deck.clickedCards.clear();
+						Deck.clickedCards.add(card);
+					}
+				}
+			});
+			
 			gameField.add(card);
 		}
 	}
+	
+	
 	
 	public void startNewGame(){
 		allCards = deck.getListOfAllCards();
@@ -109,6 +171,8 @@ public class MainFrame extends JFrame{
     	addCardsToGamefield();
     	gameField.revalidate(); 
 	}
+	
+	
 	
 } // End of MainFrame
 

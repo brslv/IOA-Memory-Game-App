@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public  class CardV extends JButton implements ActionListener{	//Initialized in the Deck's constructor
+public  class CardV extends JButton{	//Initialized in the Deck's constructor
 	// Nothing special here. Just getters and setters. Part of OOP. 
 	//You aren't supposed to know this for your next exam :D
 		private static int serialNum = 1;
@@ -20,48 +20,52 @@ public  class CardV extends JButton implements ActionListener{	//Initialized in 
 		private static int counter = 0;
 		private static ArrayList<CardV> clickedCards = new ArrayList<CardV>();
 		private static ArrayList<CardV> matchedCards = new ArrayList<CardV>();
+		
 		public CardV(ImageIcon frontImg, ImageIcon backImg) {
 			super(backImg);
 			this.frontImg = frontImg;
 			this.backImg = backImg;
 			this.currentImg = backImg;
 			this.id = serialNum;
-			this.addActionListener(this);
+//			this.addActionListener(this);
 			serialNum++;
 		}
 		
-		public void actionPerformed(ActionEvent e){			
-			if(matchedCards.size()<12){
-			if(isAlive){
-			counter++;
-			
-			if(counter <= 2){
-				currentImg = frontImg;
-				clickedCards.add(this);
-			}else{
-				
-				if(clickedCards.get(0).getFront() == clickedCards.get(1).getFront()){
-					clickedCards.get(0).isAlive = false;
-					matchedCards.addAll(Arrays.asList(clickedCards.get(0), clickedCards.get(1)));
-				}else{
-					// zatvarq
-					for(int i = 0; i < clickedCards.size(); i++){
-						clickedCards.get(i).setIcon(backImg);
-					}
-				}
-				currentImg = frontImg;
-				counter = 1;
-				clickedCards.clear();
-				clickedCards.add(this);
-			}
-			
-			this.setIcon(currentImg);
-			System.out.println(clickedCards);
-			}}
-			else{
-				System.exit(0);
-			}
-		}
+//		public void actionPerformed(ActionEvent e){			
+//			if(matchedCards.size()<12){
+//				if(isAlive){
+//					counter++;
+//					
+//					if(counter <= 2){
+//						currentImg = frontImg;
+//						clickedCards.add(this);
+//					}else{
+//						
+//						if(clickedCards.get(0).getFront() == clickedCards.get(1).getFront()){
+//							clickedCards.get(0).isAlive = false;
+//							matchedCards.addAll(Arrays.asList(clickedCards.get(0), clickedCards.get(1)));
+//						}else{
+//							// zatvarq
+//							for(int i = 0; i < clickedCards.size(); i++){
+//								clickedCards.get(i).setIcon(backImg);
+//							}
+//						}
+//						currentImg = frontImg;
+//						counter = 1;
+//						clickedCards.clear();
+//						clickedCards.add(this);
+//					}
+//					
+//					this.setIcon(currentImg);
+//					System.out.println(clickedCards);
+//					
+//					System.out.println("Matched: " + matchedCards);
+//				}
+//			}
+//			else{
+//				System.exit(0);
+//			}
+//		}
 		
 		public void setCardFrontImg(ImageIcon frontImg){
 			this.frontImg = frontImg;
