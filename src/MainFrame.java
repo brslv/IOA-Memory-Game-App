@@ -21,8 +21,7 @@ public class MainFrame extends JFrame{
 	public int gridLayoutRows = 3;
 	public int gridLayoutCols = 4;
 	public final int APP_WIDTH = gridLayoutRows * 180;
-	public final int APP_HEIGHT = gridLayoutCols * 150;
-	
+	public final int APP_HEIGHT = gridLayoutCols * 150;	
 	public int numberOfCards = gridLayoutRows * gridLayoutCols;
 	private Deck deck = new Deck(numberOfCards, "Images");
 	
