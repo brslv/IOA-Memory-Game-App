@@ -17,12 +17,12 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
-	
+	int score;
 	private Timer timer;
 	
 	private JPanel gameField;
 	private JPanel statsField;
-	private JLabel statsLabel = new JLabel("Some stats here...");
+	private JLabel statsLabel = new JLabel(score + "");
 	
 	public int gridLayoutRows = 3;
 	public int gridLayoutCols = 4;
@@ -140,6 +140,7 @@ public class MainFrame extends JFrame{
 									Deck.disabledCardsCounter += 2;
 									card.setIcon(card.getBack());
 									Deck.clickedCards.get(0).setIcon(Deck.clickedCards.get(0).getBack());
+									score++;
 								}
 							}
 						}
@@ -152,12 +153,15 @@ public class MainFrame extends JFrame{
 							ImageIcon backOfTheCard = card.getBack();
 							Deck.clickedCards.get(j).setCurrentImg(backOfTheCard);
 							Deck.clickedCards.get(j).setIcon(card.getCurrentImg());
+							
 						}
 						
 						card.setIcon(card.getFront());
 						Deck.clickedCards.clear();
 						Deck.clickedCards.add(card);
+						score--;
 					}
+					statsLabel.setText(score+"");
 				}
 			});
 			
