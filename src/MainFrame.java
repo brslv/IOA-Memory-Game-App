@@ -217,6 +217,8 @@ public class MainFrame extends JFrame{
 		Deck.clickedCards.clear();
 		Deck.disabledCardsCounter = 0;
 		clickCounter = 1;
+		score = 0;
+		statsLabel.setText(score +"");
 		
 		// Generating a new deck and putting it on it's place.
 		allCards = deck.getListOfAllCards();
