@@ -14,23 +14,26 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
-	
-	
+	int score;
+	private Timer timer;
 	
 	private JPanel gameField;
 	private JPanel statsField;
-	private JLabel statsLabel = new JLabel("Some stats here...");
-
+	private JLabel statsLabel = new JLabel(score + "");
+	
 	private static int clickCounter = 1;
-	public int gridLayoutRows = 4;
-	public int gridLayoutCols = 5;
+	public int gridLayoutRows = 3;
+	public int gridLayoutCols = 4;
 	public final int APP_WIDTH = gridLayoutRows * 180;
 	public final int APP_HEIGHT = gridLayoutCols * 150;	
 	public int numberOfCards = gridLayoutRows * gridLayoutCols;
 	private Deck deck = new Deck(numberOfCards, "Images");
+	
+	
 	
 	ArrayList<CardV> allCards;
 	
@@ -160,23 +163,20 @@ public class MainFrame extends JFrame{
 						
 						// Adding the card to the clickedCards static list.
 						Deck.clickedCards.add(card);
-						
-							if(clickCounter == 2){
-								if(card.getFront() == Deck.clickedCards.get(0).getFront()){
-									if(card != Deck.clickedCards.get(0)){
-										
-										// If the second clicked card and the previously 
-										// clicked card(this from the static clickedCards list) match
-										// 		=> disable them.
-										card.setEnabled(false);
-										Deck.clickedCards.get(0).setEnabled(false);
-										Deck.disabledCardsCounter += 2;
-										card.setIcon(card.getBack());
-										Deck.clickedCards.get(0).setIcon(Deck.clickedCards.get(0).getBack());
-									}
+
+						if(clickCounter == 2){
+							if(card.getFront() == Deck.clickedCards.get(0).getFront()){
+								if(card != Deck.clickedCards.get(0)){
+									card.setEnabled(false);
+									Deck.clickedCards.get(0).setEnabled(false);
+									Deck.disabledCardsCounter += 2;
+									card.setIcon(card.getBack());
+									Deck.clickedCards.get(0).setIcon(Deck.clickedCards.get(0).getBack());
+									score++;
 								}
 							}
-								
+						}
+						
 						clickCounter++;
 					}else{
 						
@@ -188,6 +188,7 @@ public class MainFrame extends JFrame{
 							ImageIcon backOfTheCard = card.getBack();
 							Deck.clickedCards.get(j).setCurrentImg(backOfTheCard);
 							Deck.clickedCards.get(j).setIcon(card.getCurrentImg());
+							
 						}
 						
 						// Set the newly clicked card it's front image.
@@ -199,7 +200,9 @@ public class MainFrame extends JFrame{
 						
 						// Add the newly clicked card to the array list and wait for the next click.
 						Deck.clickedCards.add(card);
+						score--;
 					}
+					statsLabel.setText(score+"");
 				}
 			});
 			
