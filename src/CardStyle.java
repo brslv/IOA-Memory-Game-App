@@ -9,7 +9,7 @@ public class CardStyle{  // Initialized in Deck's constructor
 
 	private ImageIcon backImg; 	// we need just 1 back img for all cards, because it's same
 	private ArrayList<ImageIcon> frontImg;	// keep all different images for the front
-	private static int index = -1; //-1 because cannot be changed after returning the value 
+	public static int index = -1; //-1 because cannot be changed after returning the value 
 	// This is static, because it's not a part of the Object. Used for some logic
 		
 	public CardStyle(String imgFolderPath) throws IOException{	//I was lazy to throw this. Sorry	

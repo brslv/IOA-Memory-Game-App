@@ -9,8 +9,10 @@ public class Deck{
 	private HashMap<CardV, CardV> cards;
 	public static ArrayList<CardV> clickedCards = new ArrayList<CardV>();
 	public static int disabledCardsCounter = 0;
+	public String imgFolder;
 	
 	public Deck(int countOfCards, String imgFolderPath){			
+		this.imgFolder = imgFolderPath;
 		CardStyle cs = null;
 		try {
 			cs = new CardStyle(imgFolderPath);
@@ -22,6 +24,10 @@ public class Deck{
 			CardV temp = new CardV(cs.getNextFrontImage(), cs.getBackImage());
 			cards.put(temp, temp);
 		}		
+	}
+	
+	public String getImgFolder(){
+		return this.imgFolder;
 	}
 
 	public static <E> ArrayList<E> randList(ArrayList<E> arrList){

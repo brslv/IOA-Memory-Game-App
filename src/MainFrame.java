@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
@@ -26,12 +27,13 @@ public class MainFrame extends JFrame{
 	private JLabel statsLabel = new JLabel("");
 	
 	private static int clickCounter = 1;
-	public int gridLayoutRows = 3;
-	public int gridLayoutCols = 4;
-	public final int APP_WIDTH = gridLayoutRows * 180;
-	public final int APP_HEIGHT = gridLayoutCols * 150;	
-	public int numberOfCards = gridLayoutRows * gridLayoutCols;
-	private Deck deck = new Deck(numberOfCards, "Images");
+	public int gridLayoutRows;
+	public int gridLayoutCols;
+	public int appWidth;
+	public int appHeight;	
+	public int numberOfCards;
+	private Deck deck;
+	private String imgFolderPath;
 	
 	
 	
@@ -39,9 +41,20 @@ public class MainFrame extends JFrame{
 	
 	
 	
-	public MainFrame(){
-		super("The IOA Memory Game App, version 'too-alpha-to-be-cool'.");
-		this.setSize(APP_WIDTH, APP_HEIGHT);
+	public MainFrame(int rows, int cols, Deck deckArg){
+		super("The IOA Memory Game App, v.1056107");
+		
+		//Game specifics
+		this.gridLayoutRows = rows;
+		this.gridLayoutCols = cols;
+		this.appWidth = gridLayoutRows * 180;
+		this.appHeight = gridLayoutCols * 150;	
+		this.numberOfCards = gridLayoutRows * gridLayoutCols;
+		this.deck = deckArg;
+		
+		this.imgFolderPath = deck.getImgFolder();
+		
+		this.setSize(appWidth, appHeight);
 		this.setLayout(new BorderLayout());
 		this.setVisible(true); 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,7 +63,6 @@ public class MainFrame extends JFrame{
 		
 		Toolbar();
 		addGamefield();
-		startNewGame();
 	} // End of MainFrame()
 	
 	
@@ -60,66 +72,7 @@ public class MainFrame extends JFrame{
 		menubar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		menubar.setBackground(Color.WHITE);
 		
-		// Start a new game button
-		JMenuItem eStart = new JMenuItem("New Game");
-		eStart.setBackground(Color.WHITE);
-		eStart.setMnemonic(KeyEvent.VK_N);			
-		eStart.setToolTipText("Start new game.");
-		eStart.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent event) {
-	        	startNewGame();
-	        }
-	    });
-		
-		// Set difficulty button
-		JMenu eDifficulty = new JMenu("Difficulty");
-		eDifficulty.add("Easy").addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				startNewGame();
-			}
-			
-		});
-		eDifficulty.add("Medium").addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				startNewGame();
-			}
-			
-		});;
-		eDifficulty.add("Hard").addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				startNewGame();
-			}
-			
-		});;
-		eDifficulty.setBackground(Color.WHITE);
-		eDifficulty.setToolTipText("Pick difficulty");
-		eDifficulty.addActionListener( new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				System.out.println("Clicked diff.");
-			}
-		});
-		
-		// Exit button
-		JMenuItem eExit = new JMenuItem("Exit");
-		eExit.setBackground(Color.WHITE);
-		eExit.setMnemonic(KeyEvent.VK_E);
-		eExit.setToolTipText("Exit application");
-		eExit.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent event) {
-		        System.exit(0);
-		    }
-		});
-		
-		// Adding all the buttons to the menubar
-		menubar.add(eStart);
-		menubar.add(eDifficulty);
-		menubar.add(eExit);
+		addToolbarButtons(menubar);
 		
 		setJMenuBar(menubar);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -127,12 +80,84 @@ public class MainFrame extends JFrame{
 	
 	
 	
-	public void addGamefield(){
+	private void addToolbarButtons(JMenuBar menubar){
+		// Start a new game button
+		JMenu gameBtn = new JMenu("Game");
+		gameBtn.add("New Game").addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event) {
+	        	startNewGame();
+	        }
+		});
+		gameBtn.add("Choose theme").addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event) {
+		        String[] tempArray = {"", ""};
+		    	App.main(tempArray);
+		    	dispose();
+		    }
+		});
+		gameBtn.setBackground(Color.WHITE);
+		gameBtn.setMnemonic(KeyEvent.VK_N);		
+		
+		// Set difficulty button
+		JMenu diffBtn = new JMenu("Difficulty");
+		diffBtn.add("Easy").addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CardStyle.index = -1;
+				dispose();
+				new MainFrame(2,3,new Deck(2 * 3, imgFolderPath)).startNewGame();
+			}		
+		});
+		diffBtn.add("Medium").addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CardStyle.index = -1;
+				dispose();
+				new MainFrame(3, 4, new Deck(3 * 4, imgFolderPath)).startNewGame();
+			}	
+		});
+		diffBtn.add("Hard").addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CardStyle.index = -1;
+				dispose();
+				new MainFrame(4, 5, new Deck(4 * 5, imgFolderPath)).startNewGame();
+			}		
+		});
+		diffBtn.setBackground(Color.WHITE);
+		diffBtn.setToolTipText("Pick difficulty");
+		diffBtn.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				System.out.println("Clicked diff.");
+			}
+		});
+		
+		// Exit button
+		JMenuItem exitBtn = new JMenuItem("Exit");
+		exitBtn.setBackground(Color.WHITE);
+		exitBtn.setMnemonic(KeyEvent.VK_E);
+		exitBtn.setToolTipText("Exit application");
+		exitBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent event) {
+		        System.exit(0);
+		    }
+		});
+		
+		// Adding all the buttons to the menubar
+		menubar.add(gameBtn);
+		menubar.add(diffBtn);
+		menubar.add(exitBtn);
+	}
+	
+	
+	
+	private void addGamefield(){
 		gameField = new JPanel();
-		gameField.setSize(APP_WIDTH, APP_HEIGHT);
+		gameField.setBorder(new EmptyBorder(5, 5, 5, 5) );
+		gameField.setSize(appWidth, appHeight);
 		add(gameField, BorderLayout.CENTER);
-		gameField.setLayout(new GridLayout(gridLayoutRows,gridLayoutCols));
-		gameField.setBackground(Color.DARK_GRAY);	
+		gameField.setLayout(new GridLayout(gridLayoutRows,gridLayoutCols, 5, 5));
+		gameField.setBackground(Color.LIGHT_GRAY);	
 		
 		statsField = new JPanel();
 		statsField.add(statsLabel);
@@ -143,15 +168,17 @@ public class MainFrame extends JFrame{
 	
 	
 	
-	public void removeCardsFromGamefield(){
+	private void removeCardsFromGamefield(){
 		gameField.removeAll();
 	}
 	
 	
 	
-	public void addCardsToGamefield(){
+	// Magic, don't touch!
+	private void addCardsToGamefield(){
 		for (int i = 0; i < allCards.size(); i++) {
 			CardV card = new CardV(allCards.get(i).getFront(), allCards.get(i).getBack());
+			card.setBackground(Color.WHITE);
 			
 			card.addActionListener(new ActionListener(){
 				@Override
@@ -211,7 +238,7 @@ public class MainFrame extends JFrame{
 	
 	
 	
-	public void startNewGame(){
+	protected void startNewGame(){
 		// Reseting all the information on the previous game, if any.
 		Deck.clickedCards.clear();
 		Deck.disabledCardsCounter = 0;
