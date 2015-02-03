@@ -23,7 +23,7 @@ public class MainFrame extends JFrame{
 	
 	private JPanel gameField;
 	private JPanel statsField;
-	private JLabel statsLabel = new JLabel(score + "");
+	private JLabel statsLabel = new JLabel("");
 	
 	private static int clickCounter = 1;
 	public int gridLayoutRows = 3;
@@ -172,8 +172,9 @@ public class MainFrame extends JFrame{
 									Deck.disabledCardsCounter += 2;
 									card.setIcon(card.getBack());
 									Deck.clickedCards.get(0).setIcon(Deck.clickedCards.get(0).getBack());
-									score++;
 								}
+							}else{
+								if(clickCounter == 2) score++;
 							}
 						}
 						
@@ -188,7 +189,6 @@ public class MainFrame extends JFrame{
 							ImageIcon backOfTheCard = card.getBack();
 							Deck.clickedCards.get(j).setCurrentImg(backOfTheCard);
 							Deck.clickedCards.get(j).setIcon(card.getCurrentImg());
-							
 						}
 						
 						// Set the newly clicked card it's front image.
@@ -200,9 +200,8 @@ public class MainFrame extends JFrame{
 						
 						// Add the newly clicked card to the array list and wait for the next click.
 						Deck.clickedCards.add(card);
-						score--;
 					}
-					statsLabel.setText(score+"");
+					statsLabel.setText("Mismatched: " + score+"");
 				}
 			});
 			
@@ -218,7 +217,7 @@ public class MainFrame extends JFrame{
 		Deck.disabledCardsCounter = 0;
 		clickCounter = 1;
 		score = 0;
-		statsLabel.setText(score +"");
+		statsLabel.setText("Mismatched: " + score +"");
 		
 		// Generating a new deck and putting it on it's place.
 		allCards = deck.getListOfAllCards();
