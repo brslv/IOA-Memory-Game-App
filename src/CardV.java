@@ -27,45 +27,8 @@ public  class CardV extends JButton{	//Initialized in the Deck's constructor
 			this.backImg = backImg;
 			this.currentImg = backImg;
 			this.id = serialNum;
-//			this.addActionListener(this);
 			serialNum++;
 		}
-		
-//		public void actionPerformed(ActionEvent e){			
-//			if(matchedCards.size()<12){
-//				if(isAlive){
-//					counter++;
-//					
-//					if(counter <= 2){
-//						currentImg = frontImg;
-//						clickedCards.add(this);
-//					}else{
-//						
-//						if(clickedCards.get(0).getFront() == clickedCards.get(1).getFront()){
-//							clickedCards.get(0).isAlive = false;
-//							matchedCards.addAll(Arrays.asList(clickedCards.get(0), clickedCards.get(1)));
-//						}else{
-//							// zatvarq
-//							for(int i = 0; i < clickedCards.size(); i++){
-//								clickedCards.get(i).setIcon(backImg);
-//							}
-//						}
-//						currentImg = frontImg;
-//						counter = 1;
-//						clickedCards.clear();
-//						clickedCards.add(this);
-//					}
-//					
-//					this.setIcon(currentImg);
-//					System.out.println(clickedCards);
-//					
-//					System.out.println("Matched: " + matchedCards);
-//				}
-//			}
-//			else{
-//				System.exit(0);
-//			}
-//		}
 		
 		public void setCardFrontImg(ImageIcon frontImg){
 			this.frontImg = frontImg;

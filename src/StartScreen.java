@@ -15,7 +15,7 @@ public class StartScreen extends JFrame {
 
 	private int selectedCategoryID;
 	public String selectedCategoryTitle;
-	private String[] categories = {"beers", "Fruits", "kamasutra"};
+	private String[] categories = CardStyle.getListOfCategories("Images");
 	
 	public static void main(String[] args) {
 			 

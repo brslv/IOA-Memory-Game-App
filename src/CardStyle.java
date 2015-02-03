@@ -31,6 +31,21 @@ public class CardStyle{  // Initialized in Deck's constructor
 			return null;
 		}		
 	}
+	
+	public static String[] getListOfCategories(String imgFolderPath){
+		File folder = new File(imgFolderPath);
+		
+		String[] directories = folder.list(new FilenameFilter() {
+			
+		  @Override
+		  public boolean accept(File current, String name) {
+		    return new File(current, name).isDirectory();
+		  }
+		  
+		});
+		
+		return directories;
+	}
 		
 	//Not sure if there must be try-catch block but let's not risk it
 	// Getting all images from a directory
